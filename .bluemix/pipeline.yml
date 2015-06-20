@@ -1,0 +1,62 @@
+---
+stages:
+- name: Globalize
+  inputs:
+  - type: git
+    branch: master
+  triggers:
+  - type: stage
+  jobs:
+  - name: machine translation
+    type: builder
+    extension_id: ibm.devops.services.pipeline.globalization.builder
+    target:
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
+    SETUP_SERVICE_SPACE: 'true'
+    INPUT_PATTERN: translation_en.properties
+- name: Package application
+  inputs:
+  - type: job
+    stage: Globalize
+    job: machine translation
+  triggers:
+  - type: stage
+  jobs:
+  - name: maven
+    type: builder
+    artifact_dir: target
+    build_type: maven
+    script: |-
+      #!/bin/bash
+      mvn -B package
+- name: Deploy
+  inputs:
+  - type: job
+    stage: Package application
+    job: maven
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
+      application: ${CF_APP}
+    script: |-
+      #!/bin/bash
+      cf push "${CF_APP}" -p BookClub-1.0-SNAPSHOT.war -m 768M --no-start
+      cf bind-service "${CF_APP}" mt-watson
+      cf bind-service "${CF_APP}" "IBM Globalization"
+      cf bind-service "${CF_APP}" "IBM Insights for Twitter"
+      cf set-env "${CF_APP}" NY_TIMES_URL api.nytimes.com
+      cf set-env "${CF_APP}" NY_TIMES_API_KEY f71533f1d731f791a0a2bef3f78d211e:9:71512189
+      cf set-env "${CF_APP}" DREAM_BOOKS_URL idreambooks.com
+      cf set-env "${CF_APP}" DREAM_BOOKS_API_KEY 33b011bc2741dca46f0e59d4ef6d3571bce4f569
+      cf set-env "${CF_APP}" ALCHEMY_API_KEY 3ff8c3d5ecac0afb354195ed49eee63f2d4af73e
+      cf start "${CF_APP}"
+
+
+      # view logs
+      #cf logs "${CF_APP}" --recent

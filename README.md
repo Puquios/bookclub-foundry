@@ -1,8 +1,8 @@
 # Bookstore 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/Puquios/bookstore-foundry.git)
-
 # Status 
 work in progress.  Currently checking in v1.0 
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/Puquios/bookstore-foundry.git)
 
 # Overview  
 To get started with using Globalization service you need to fork this project

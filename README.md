@@ -1,3 +1,9 @@
+# Bookstore 
+
+# Status 
+work in progress.  Currently checking in v1.0 
+
+# Overview  
 To get started with using Globalization service you need to fork this project
 and change the credentials in the pom.xml file to your own credentials.
 

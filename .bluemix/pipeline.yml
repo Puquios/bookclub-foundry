@@ -59,6 +59,7 @@ stages:
       application: ${CF_APP}
     script: |-
       #!/bin/bash
+      set +x 
       export red='\e[0;31m'
       export no_color='\e[0m' # No Color
       if [ -z "${NY_TIMES_API_KEY}" ]; then 

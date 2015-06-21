@@ -42,13 +42,13 @@ stages:
   properties:
   - name: NY_TIMES_API_KEY
     value: 40c11f9c846004aff534eaf95526988c:11:72351455
-    type: text
+    type: secure
   - name: DREAM_BOOKS_API_KEY
     value: 33b011bc2741dca46f0e59d4ef6d3571bce4f569
-    type: text
+    type: secure
   - name: ALCHEMY_API_KEY
     value: 6ee0287255ef84d6096e16a72bae869bcebee69c
-    type: text
+    type: secure
   jobs:
   - name: Deploy
     type: deployer

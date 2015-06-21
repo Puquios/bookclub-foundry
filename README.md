@@ -2,7 +2,7 @@
 # Status 
 work in progress.  Currently checking in v1.0 
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/Puquios/bookstore-foundry.git)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/Puquios/bookclub-foundry.git)
 
 # Overview  
 To get started with using Globalization service you need to fork this project
@@ -43,7 +43,8 @@ deploy script.
         http://developer.nytimes.com
         http://idreambooks.com/api
         http://www.alchemyapi.com
-     
+
+
 8. If you want to build the application in IBM DevOps Services, then add a Stage from the "Build & Deploy" tab with a Build job type using the maven builder. Use the default archive directory of target. 
 Otherwise build the application from your command line:
 

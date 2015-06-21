@@ -99,7 +99,6 @@ def findServiceNameInSpace (service):
                         serviceName = serviceName.strip()
         else:
             continue
-    Logger.info("Found existing service instance " + serviceName)
 
     return serviceName
 
@@ -225,6 +224,8 @@ def checkAndCreateBridgeApp (appName=DEFAULT_BRIDGEAPP_NAME):
 def checkOrAddService (service, plan, serviceName):
     # look to see if we have the service in our space
     existingService = findServiceNameInSpace(service)
+    if existingService == None:
+        serviceName=serviceName
     print "service " + service 
     print "plan " + plan 
     print "serviceName " + serviceName 

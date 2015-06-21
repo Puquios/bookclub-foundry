@@ -1,13 +1,13 @@
-# Bookstore 
+# BookClub with CF delivery pipeline 
 
 # Try me 
-Before you start get API Keys for the following service: 
+Before you start get API keys for external services.  You will update the secure properties on the Deploy Stage of the generated pipeline.  
 * http://developer.nytimes.com
 * http://idreambooks.com/api
 * http://www.alchemyapi.com
-You will need to update the secure properties on the 'Deploy' Stage of the generated pipeline for this application.  
 
-Click the following button (clones project, creates DevOps Services Project, generates multi-stage pipeline, deploys application to IBM Bluemix)
+Click this (clones project, creates DevOps Services Project, generates multi-stage pipeline, deploys application to IBM Bluemix):
+
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/Puquios/bookclub-foundry.git)
 
 # Purpose 

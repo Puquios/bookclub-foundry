@@ -60,18 +60,16 @@ stages:
     script: |-
       #!/bin/bash
       set +x 
-      export red='\e[0;31m'
-      export no_color='\e[0m' # No Color
       if [ -z "${NY_TIMES_API_KEY}" ]; then 
-          echo -e "${red}Please set NY_TIMES_API_KEY in stage environment properties.  This can be obtained from http://developer.nytimes.com ${no_color}"
+          echo -e "\e[0;31m Please set NY_TIMES_API_KEY in stage environment properties.  This can be obtained from http://developer.nytimes.com"
           exit 1
       fi 
       if [ -z "${DREAM_BOOKS_API_KEY}" ]; then 
-          echo -e "${red}Please set DREAM_BOOKS_API_KEY in stage environment properties.  This can be obtained from http://idreambooks.com/api ${no_color}"
+          echo -e "\e[0;31m Please set DREAM_BOOKS_API_KEY in stage environment properties.  This can be obtained from http://idreambooks.com/api"
           exit 1
       fi 
       if [ -z "${ALCHEMY_API_KEY}" ]; then 
-          echo -e "${red}Please set ALCHEMY_API_KEY in stage environment properties.  This can be obtained from http://www.alchemyapi.com ${no_color}"
+          echo -e "\e[0;31m Please set ALCHEMY_API_KEY in stage environment properties.  This can be obtained from http://www.alchemyapi.com"
           exit 1
       fi 
       cf push "${CF_APP}" -p BookClub-1.0-SNAPSHOT.war -m 768M --no-start

@@ -5,7 +5,11 @@ stages:
   - type: git
     branch: master
   triggers:
-  - type: stage
+  - type: commit
+properties:
+  - name: THIS_SUBMISSION_NAME
+    value: com.ibm.translation
+    type: text
   jobs:
   - name: machine translation
     type: builder

@@ -39,6 +39,16 @@ stages:
   - type: job
     stage: Package application
     job: maven
+  properties:
+  - name: NY_TIMES_API_KEY
+    value: 40c11f9c846004aff534eaf95526988c:11:72351455
+    type: text
+  - name: DREAM_BOOKS_API_KEY
+    value: 33b011bc2741dca46f0e59d4ef6d3571bce4f569
+    type: text
+  - name: ALCHEMY_API_KEY
+    value: 6ee0287255ef84d6096e16a72bae869bcebee69c
+    type: text
   jobs:
   - name: Deploy
     type: deployer
@@ -49,13 +59,27 @@ stages:
       application: ${CF_APP}
     script: |-
       #!/bin/bash
+      export red='\e[0;31m'
+      export no_color='\e[0m' # No Color
+      if [ -z "${NY_TIMES_API_KEY}" ]; then 
+          echo -e "${red}Please set NY_TIMES_API_KEY in stage environment properties.  This can be obtained from http://developer.nytimes.com ${no_color}"
+          exit 1
+      fi 
+      if [ -z "${DREAM_BOOKS_API_KEY}" ]; then 
+          echo -e "${red}Please set DREAM_BOOKS_API_KEY in stage environment properties.  This can be obtained from http://idreambooks.com/api ${no_color}"
+          exit 1
+      fi 
+      if [ -z "${ALCHEMY_API_KEY}" ]; then 
+          echo -e "${red}Please set ALCHEMY_API_KEY in stage environment properties.  This can be obtained from http://www.alchemyapi.com ${no_color}"
+          exit 1
+      fi 
       cf push "${CF_APP}" -p BookClub-1.0-SNAPSHOT.war -m 768M --no-start
       python setup_services.py --app ${CF_APP}
       cf set-env "${CF_APP}" NY_TIMES_URL api.nytimes.com
-      cf set-env "${CF_APP}" NY_TIMES_API_KEY f71533f1d731f791a0a2bef3f78d211e:9:71512189
+      cf set-env "${CF_APP}" NY_TIMES_API_KEY ${NY_TIMES_API_KEY}
       cf set-env "${CF_APP}" DREAM_BOOKS_URL idreambooks.com
-      cf set-env "${CF_APP}" DREAM_BOOKS_API_KEY 33b011bc2741dca46f0e59d4ef6d3571bce4f569
-      cf set-env "${CF_APP}" ALCHEMY_API_KEY 3ff8c3d5ecac0afb354195ed49eee63f2d4af73e
+      cf set-env "${CF_APP}" DREAM_BOOKS_API_KEY ${DREAM_BOOKS_API_KEY}
+      cf set-env "${CF_APP}" ALCHEMY_API_KEY ${ALCHEMY_API_KEY}
       cf start "${CF_APP}"
 
 

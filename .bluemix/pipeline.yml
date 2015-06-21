@@ -30,7 +30,10 @@ stages:
     build_type: maven
     script: |-
       #!/bin/bash
+      # build the application 
       mvn -B package
+      #copy deploy utility
+      cp setup_services.py ${ARCHIVE_DIR}
 - name: Deploy
   inputs:
   - type: job
@@ -47,9 +50,7 @@ stages:
     script: |-
       #!/bin/bash
       cf push "${CF_APP}" -p BookClub-1.0-SNAPSHOT.war -m 768M --no-start
-      cf bind-service "${CF_APP}" mt-watson
-      cf bind-service "${CF_APP}" "IBM Globalization"
-      cf bind-service "${CF_APP}" "IBM Insights for Twitter"
+      python setup_services.py --app ${CF_APP}
       cf set-env "${CF_APP}" NY_TIMES_URL api.nytimes.com
       cf set-env "${CF_APP}" NY_TIMES_API_KEY f71533f1d731f791a0a2bef3f78d211e:9:71512189
       cf set-env "${CF_APP}" DREAM_BOOKS_URL idreambooks.com

@@ -27,6 +27,7 @@ Contents:
 *   pom.xml: This file builds the Book Club application using Maven
 
 # Pipeline 
+[http://robbieminshall.blogspot.com/2015/06/forking-piplines.html](Blog on creation of this pipeline)
 * Globalize:  
     - Adds Globalization Pipeline service to the space, binds the application and sends resources for translation where they will be machine translated, and available for review and update from translators.   
 * Package application 

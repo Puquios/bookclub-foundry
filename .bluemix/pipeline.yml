@@ -6,7 +6,7 @@ stages:
     branch: master
   triggers:
   - type: commit
-properties:
+  properties:
   - name: THIS_SUBMISSION_NAME
     value: com.ibm.translation
     type: text

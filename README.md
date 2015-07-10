@@ -1,4 +1,6 @@
 # BookClub with CF delivery pipeline 
+# Status
+Currently being updated to use the new Language Translation APIS from Watson.
 
 # Try me 
 Before you start get API keys for external services.  You will update the secure properties on the Deploy Stage of the generated pipeline.  
